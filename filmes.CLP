@@ -44,7 +44,7 @@
 (defrule getClasse
 	(declare (salience 100))
 	=>
-	(printout t "Qual classe de filme você prefere?(fantosioso/realista/documental): ")
+	(printout t "Qual classe de filme você prefere?(fantosioso/realista/documental/animacao): ")
 	(bind ?response (read))
 	(assert (Classe (classe ?response))))
 
@@ -110,7 +110,7 @@
 	(Personagem (personagem humanos ))
 	(or (Classe (classe realista )) (Classe (classe fantasioso)))
 	(ParteMelhor (parteMelhor contexto))
-	(Atores (atores sim))
+	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blocksbuster))
 	(Oscar (oscar nao ))
 	(Faixa (faixa familia ))
@@ -126,7 +126,7 @@
 	(or (Personagem (personagem humanos )) (Personagem (personagem objetos)))
 	(Classe (classe fantasioso ))
 	(ParteMelhor (parteMelhor contexto))
-	(Atores (atores sim ))
+	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blocksbuster ))
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa familia ))
@@ -142,9 +142,9 @@
 	(or (Personagem (personagem humanos )) (Personagem (personagem objetos)))
 	(Classe (classe fantasioso ))
 	(ParteMelhor (parteMelhor contexto))
-	(Atores (atores sim))
+	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blockbuster))
-	(Oscar (oscar sim))
+	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
 	(Faixa (faixa familia ))
 	=>
 	(assert (grad done))
@@ -160,7 +160,7 @@
 	(ParteMelhor (parteMelhor final))
 	(Atores (atores nao ))
 	(Alcance (alcance cult ))
-	(Oscar (oscar sim ))
+	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
 	(or (Faixa (faixa adulto)) (Faixa (faixa familia)))
 	=>
 	(assert (grad done))
@@ -174,7 +174,7 @@
 	(Personagem (personagem humanos ))
 	(Classe (classe realista))
 	(ParteMelhor (parteMelhor contexto))
-	(Atores (atores sim))
+	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blockbuster ))
 	(Oscar (oscar nao ))
 	(Faixa (faixa adulto))
@@ -197,6 +197,151 @@
 	=>
 	(assert (grad done))
 	(printout t "John Wick (2014 - 2019)" crlf))
+
+; Poderoso Chefão
+(defrule filme8
+	(or (Qnt (qnt trilogia)) (Qnt (qnt unico)))
+	(or (Final (final feliz )) (Final (final triste)))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(ParteMelhor (parteMelhor contexto))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(or (Alcance (alcance blockbuster )) (Alcance ( alcance cult)))
+	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "O Poderoso Chefão (1973)" crlf))	
+
+; Scarface
+(defrule filme9
+	(Qnt (qnt unico))
+	(Final (final triste))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(ParteMelhor (parteMelhor contexto))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(or (Alcance (alcance blockbuster )) (Alcance ( alcance cult)))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Scarface (1983)" crlf))	
+
+; Donnie Darko
+(defrule filme10
+	(Qnt (qnt unico))
+	(or (Final (final triste)) (Final (final feliz)))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(or (Classe (classe realista)) (Classe (classe fantasioso)))
+	(ParteMelhor (parteMelhor contexto))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance cult))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Donnie Darko (2001)" crlf))
+	
+
+; AKIRA
+(defrule filme11
+	(Qnt (qnt unico))
+	(or (Final (final triste)) (Final (final feliz)))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(Classe (classe fantasioso))
+	(ParteMelhor (parteMelhor contexto))
+	(Atores (atores nao))
+	(Alcance ( alcance cult))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Akira (1988)" crlf))	
+
+; A Origem
+(defrule filme12
+	(Qnt (qnt unico))
+	(Final (final feliz))
+	(or (Principal (principal grupo)) (Principal (principal unico)))
+	(Personagem (personagem humanos ))
+	(or (Classe (classe realista)) (Classe (classe fantasioso)))
+	(or (ParteMelhor (parteMelhor final)) (ParteMelhor (parteMelhor contexto)))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance blockbuster))
+	(or (Oscar (oscar sim)) (Oscar (oscar nao)))
+	(or (Faixa (faixa infatil)) (Faixa (faixa familia)))
+	=>
+	(assert (grad done))
+	(printout t "A Origem (2010)" crlf))	
+
+; Ilha do Medo
+(defrule filme13
+	(Qnt (qnt unico))
+	(Final (final triste))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(or (ParteMelhor (parteMelhor final)) (ParteMelhor (parteMelhor contexto)))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance blockbuster ))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Ilha do Medo (2010)" crlf))	
+
+; A espera de um milagre
+(defrule filme14
+	(Qnt (qnt unico))
+	(Final (final triste))
+	(Principal (principal grupo))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(ParteMelhor (parteMelhor contexto))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance blockbuster ))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "A espera de um milagre (1999)" crlf))
+
+; Um sonho de liberdade
+(defrule filme15
+	(Qnt (qnt unico))
+	(Final (final feliz))
+	(Principal (principal grupo))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(or (ParteMelhor (parteMelhor final)) (ParteMelhor (parteMelhor contexto)))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance blockbuster ))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Um sonho de liberdade (1994)" crlf))
+
+; Clube da Luta
+(defrule filme16
+	(Qnt (qnt unico))
+	(or (Final (final feliz)) (Final (final triste)))
+	(Principal (principal unico))
+	(Personagem (personagem humanos ))
+	(Classe (classe realista))
+	(or (ParteMelhor (parteMelhor final)) (ParteMelhor (parteMelhor contexto)))
+	(or (Atores (atores sim )) (Atores (atores nao)))
+	(Alcance ( alcance blockbuster ))
+	(Oscar (oscar nao))
+	(Faixa (faixa adulto))
+	=>
+	(assert (grad done))
+	(printout t "Clube da Luta (1999)" crlf))	
 
 	
 (defrule None
