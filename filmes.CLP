@@ -128,7 +128,7 @@
 	(ParteMelhor (parteMelhor contexto))
 	(Atores (atores sim ))
 	(Alcance (alcance blocksbuster ))
-	(or (Oscar (oscar nao )) (Oscar (oscar sim))
+	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa familia ))
 	=>
 	(assert (grad done))
@@ -139,7 +139,7 @@
 	(Qnt (qnt trilogia))
 	(or (Final (final feliz )) (Final (final triste)))
 	(Principal (principal grupo ))
-	(or (Personagem (personagem humanos )) (Personagem (personagens objetos)))
+	(or (Personagem (personagem humanos )) (Personagem (personagem objetos)))
 	(Classe (classe fantasioso ))
 	(ParteMelhor (parteMelhor contexto))
 	(Atores (atores sim))
@@ -188,7 +188,7 @@
 	(Final (final feliz ))
 	(Principal (principal grupo))
 	(Personagem (personagem humanos ))
-	(Classe (classe documental
+	(Classe (classe documental))
 	(ParteMelhor (parteMelhor contexto))
 	(Atores (atores nao))
 	(or (Alcance (alcance blockbuster )) (Alcance ( alcance cult)))
