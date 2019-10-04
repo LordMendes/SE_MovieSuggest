@@ -138,7 +138,7 @@
 (defrule filme4
 	(Qnt (qnt trilogia))
 	(or (Final (final feliz )) (Final (final triste)))
-	(or (Principal (principal unico)) (Principal (principal grupo ))
+	(Principal (principal grupo ))
 	(or (Personagem (personagem humanos )) (Personagem (personagens objetos)))
 	(Classe (classe fantasioso ))
 	(ParteMelhor (parteMelhor contexto))
