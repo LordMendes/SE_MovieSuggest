@@ -16,70 +16,70 @@
 (defrule getQnt 
   	(declare (salience 100))
 	=>
-	(printout t "Você prefere filmes com que tipo continuidade?(trilogia/saga/unico): ")
+	(printout t "Voce prefere filmes com que tipo continuidade?(trilogia/saga/unico): ")
 	(bind ?response (read))
 	(assert (Qnt (qnt ?response))))
 
 (defrule getFinal
   	(declare (salience 100))
 	=>
-	(printout t "Você prefere que tipo de final? (feliz/triste): ")
+	(printout t "Voce prefere que tipo de final? (feliz/triste): ")
 	(bind ?response (read))
 	(assert (Final (final ?response))))
 
 (defrule getPrincipal
   	(declare (salience 100))
 	=>
-	(printout t "Você prefere que quantidade de personagens principais?(unico/grupo): ")
+	(printout t "Voce prefere que quantidade de personagens principais?(unico/grupo): ")
 	(bind ?response (read))
 	(assert (Principal (principal ?response))))
 
 (defrule getPersonagem
   	(declare (salience 100))
 	=>
-	(printout t "Você prefere filmes com personagens humanos ou animais/objetos(humanos/objetos): ")
+	(printout t "Voce prefere filmes com personagens humanos ou animais/objetos(humanos/objetos): ")
 	(bind ?response (read))
 	(assert (Personagem (personagem ?response))))
 
 (defrule getClasse
 	(declare (salience 100))
 	=>
-	(printout t "Qual classe ou aspectos de filme você prefere?(fantosioso/realista/documental/animacao/si-fi): ")
+	(printout t "Qual classe ou aspectos de filme voce prefere?(fantosioso/realista/documental/animacao/si-fi): ")
 	(bind ?response (read))
 	(assert (Classe (classe ?response))))
 
 (defrule getParteMelhor
 	(declare (salience 100))
 	=>
-	(printout t "O que é mais importate pra você?(final/contexto/plottwist): ")
+	(printout t "O que e mais importate pra voce?(final/contexto/plottwist): ")
 	(bind ?response (read))
 	(assert (ParteMelhor (parteMelhor ?response))))
 
 (defrule getAtores
 	(declare (salience 100))
 	=>
-	(printout t "Atores/Atrizes famosos são importante?(sim/nao): ")
+	(printout t "Atores/Atrizes famosos sao importante?(sim/nao): ")
 	(bind ?response (read))
 	(assert (Atores (atores ?response))))
 
 (defrule getAlcance
 	(declare (salience 100))
 	=>
-	(printout t "Você prefere filme com que alcance?(blockbuster/cult/sessao_da_tarde): ")
+	(printout t "Voce prefere filme com que alcance?(blockbuster/cult/sessao_da_tarde): ")
 	(bind ?response (read))
 	(assert (Alcance (alcance ?response))))
 
 (defrule getOscar
    	(declare (salience 100))
 	=>
-	(printout t "Oscar é importante?(sim/nao): ")
+	(printout t "Oscar e importante?(sim/nao): ")
 	(bind ?response (read))
 	(assert (Oscar (oscar ?response))))
 
 (defrule getFaixa
    	(declare (salience 100))
 	=>
-	(printout t "Qual a faixa indicativa que melhor reflete sua preferência(infantil/familia/adulto): ")
+	(printout t "Qual a faixa indicativa que melhor reflete sua preferencia(infantil/familia/adulto): ")
 	(bind ?response (read))
 	(assert (Faixa (faixa ?response))))
 
@@ -92,14 +92,14 @@
 	(Final (final feliz ))
 	(or (Principal (principal grupo )) (Principal (principal unico)))
 	(Personagem (personagem humanos ))
-	(Classe (classe fantasioso ))
-	(or (ParteMelhor (parteMelhor contexto)) (ParteMelhor (parteMelhor final)))
+	(or (Classe (classe fantasioso )) (Classe (classe sessao_da_tarde)))
+	(ParteMelhor (parteMelhor contexto))
 	(Atores (atores nao ))
 	(Alcance (alcance cult ))
 	(Oscar (oscar nao ))
 	(Faixa (faixa familia ))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "A fantástica Fabrica de Chocolate (1971)" crlf))
 
 ; Velozes e Furiosos
@@ -108,14 +108,14 @@
 	(or (Final (final feliz)) (Final (final triste)))
 	(Principal (principal grupo))
 	(Personagem (personagem humanos))
-	(or (Classe (classe realista )) (Classe (classe fantasioso)) (Classe (classe si-fi)))
-	(or (ParteMelhor (parteMelhor contexto)) (ParteMelhor(parteMelhor plottwist)))
+	(or (Classe (classe realista )) (Classe (classe fantasioso)))
+	(ParteMelhor (parteMelhor contexto))
 	(or (Atores (atores sim )) (Atores (atores nao)))
 	(or (Alcance (alcance blockbuster)) (Alcance (alcance sessao_da_tarde)))
 	(Oscar (oscar nao ))
-	(or (Faixa (faixa familia)) (Faixa (faixa adulto)))
+	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Filmes de Velozes e Furiosos" crlf))
 
 ; Filmes da Marvel
@@ -125,30 +125,30 @@
 	(or (Principal (principal grupo )) (Principal (principal unico)))
 	(or (Personagem (personagem humanos )) (Personagem (personagem objetos)))
 	(or (Classe (classe fantasioso )) (Classe (classe si-fi)))
-	(or (ParteMelhor (parteMelhor contexto)) (ParteMelhor(parteMelhor plottwist)))
+	(ParteMelhor (parteMelhor contexto))
 	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blockbuster ))
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa familia ))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Filmes da Marvel (2008 - 2019)" crlf))
 
-; Senhor do Anéis
+; Senhor do Aneis
 (defrule filme4
 	(Qnt (qnt trilogia))
-	(or (Final (final feliz )) (Final (final triste)))
+	(Final (final feliz ))
 	(Principal (principal grupo ))
 	(or (Personagem (personagem humanos )) (Personagem (personagem objetos)))
 	(Classe (classe fantasioso ))
-		(or (ParteMelhor (parteMelhor contexto)) )
+	(or (ParteMelhor (parteMelhor contexto)) )
 	(or (Atores (atores sim )) (Atores (atores nao)))
 	(Alcance (alcance blockbuster))
 	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
 	(Faixa (faixa familia ))
 	=>
-	(assert (grad done))
-	(printout t "O Senhor dos Anéis (2001 - 2003)" crlf))
+	(assert (filme escolhido))
+	(printout t "O Senhor dos Aneis (2001 - 2003)" crlf))
 
 ; Bonequinha de Luxo
 (defrule filme5
@@ -163,7 +163,7 @@
 	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
 	(or (Faixa (faixa adulto)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Bonequinha de Luxo (1961)" crlf))
 
 ; John Wick
@@ -179,7 +179,7 @@
 	(Oscar (oscar nao ))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "John Wick (2014 - 2019)" crlf))
 
 ; Documentario Indie Game
@@ -195,10 +195,10 @@
 	(Oscar (oscar nao ))
 	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "John Wick (2014 - 2019)" crlf))
 
-; Poderoso Chefão
+; Poderoso Chefao
 (defrule filme8
 	(or (Qnt (qnt trilogia)) (Qnt (qnt unico)))
 	(or (Final (final feliz )) (Final (final triste)))
@@ -211,8 +211,8 @@
 	(or (Oscar (oscar nao)) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
-	(printout t "O Poderoso Chefão (1973)" crlf))	
+	(assert (filme escolhido))
+	(printout t "O Poderoso Chefao (1973)" crlf))	
 
 ; Scarface
 (defrule filme9
@@ -227,7 +227,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Scarface (1983)" crlf))	
 
 ; Donnie Darko
@@ -243,7 +243,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Donnie Darko (2001)" crlf))
 	
 
@@ -260,7 +260,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Akira (1988)" crlf))	
 
 ; A Origem
@@ -276,7 +276,7 @@
 	(or (Oscar (oscar sim)) (Oscar (oscar nao)))
 	(or (Faixa (faixa infatil)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "A Origem (2010)" crlf))	
 
 ; Ilha do Medo
@@ -292,7 +292,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Ilha do Medo (2010)" crlf))	
 
 ; A espera de um milagre
@@ -308,7 +308,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "A espera de um milagre (1999)" crlf))
 
 ; Um sonho de liberdade
@@ -324,7 +324,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Um sonho de liberdade (1994)" crlf))
 
 ; Clube da Luta
@@ -340,7 +340,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Clube da Luta (1999)" crlf))	
 
 ; Taxi Driver
@@ -356,7 +356,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Taxi Driver (1976)" crlf))
 
 ; De volta para o futuro
@@ -372,7 +372,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(or (Faixa (faixa familia)) (Faixa  (faixa infantil)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Triologia de volta para o futuro (1985)" crlf))
 
 ; Tempos Modernos
@@ -388,7 +388,7 @@
 	(Oscar (oscar nao))
 	(or (Faixa  (faixa infantil)) (Faixa (faixa adulto)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Tempos Modernos (1936)" crlf))
 
 ; Pulp Fiction
@@ -400,11 +400,11 @@
 	(Classe (classe realista))
 	(ParteMelhor (parteMelhor contexto))
 	(Atores (atores sim ))
-	(Alcance (alcance cult)))
+	(Alcance (alcance cult))
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Pulp fiction (1995)" crlf))
 	
 ; StarWars
@@ -420,7 +420,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "StarWars (1999 ~ 2019)" crlf))
 
 ; Curtindo a vida adoidado
@@ -434,9 +434,9 @@
 	(Atores (atores nao))
 	(Alcance (alcance sessao_da_tarde))
 	(Oscar (oscar nao))
-	(Faixa (faixa familia)))
+	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Curtindo a vida adoidado (1986)" crlf))
 
 ; Alien
@@ -452,7 +452,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa  (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Alien - o Oitavo passageiro (1979)" crlf))
 
 ; Matrix
@@ -461,14 +461,14 @@
 	(Final(final feliz))
 	(or (Principal(principal unico)) (Principal (principal grupo)))
 	(Personagem(personagem humanos))
-	(or (Classe (classe si-fi))
-	(or (ParteMelhor (parteMelhor contexto)) (ParteMelhor(parteMelhorfinal)))
+	(Classe (classe si-fi))
+	(or (ParteMelhor (parteMelhor contexto)) (ParteMelhor(parteMelhor final)))
 	(or (Atores (atores sim)) (Atores (atores nao)))
 	(Alcance (alcance blockbuster))
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(or (Faixa (faixa adulto)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Triologia Matrix (1999 ~ 2003)" crlf))
 
 ; O Exterminador do Futuro
@@ -484,12 +484,12 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " Exterminador do Futuro (1984 ~2019)" crlf))
 
 ; O Curioso Caso de Benjamim Button
 (defrule filme26
-	(or(Qnt qnt) (Qnt (qnt unico)))
+	(Qnt (qnt unico))
 	(Final(final triste))
 	(Principal(principal unico))
 	(Personagem(personagem humanos))
@@ -500,15 +500,15 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " O Curioso caso de Benjamim Button (2009)" crlf))
 
 ; Harry Potter
 (defrule filme27
 	(Qnt (qnt saga))
 	(or (Final(final feliz)) (Final (final triste)))
-	(or(Principal grupo)) (Principal(principal unico)))
-	(or (Personagem (personagem objetos)) (Personagem(personagem humanos))
+	(or (Principal (principal grupo)) (Principal (principal unico)))
+	(or (Personagem (personagem objetos)) (Personagem(personagem humanos)))
 	(Classe (classe fantasia))
 	(ParteMelhor (parteMelhor contexto ))   
 	(or (Atores (atores sim )) (Atores (atores nao )))
@@ -516,7 +516,7 @@
 	(Oscar (oscar nao))
 	(or (Faixa (faixa infantil)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " Harry Potter (2001 ~2011)" crlf))
 
 ; Piratas do Caribe
@@ -532,7 +532,7 @@
 	(Oscar (oscar nao))
 	(Faixa (faixa familia))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " Piratas do Caribe (2013 ~ 2017)" crlf))
 
 ; Divertida Mente
@@ -548,13 +548,13 @@
 	(or (Oscar (oscar nao)) (Oscar (oscar nao)))
 	(Faixa (faixa infantil))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " Divertida Mente (2015)" crlf))
 
 
 ; Rei Leao
 (defrule filme30
-	(or (Qnt unico) (Qnt (qnt saga)))
+	(or (Qnt (qnt unico)) (Qnt (qnt saga)))
 	(Final (final feliz))
 	(Principal (principal unico))
 	(Personagem (personagem humanos ))
@@ -565,8 +565,8 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa infantil))
 	=>
-	(assert (grad done))
-	(printout t " Rei Leão (1994 ~ 2019)" crlf))
+	(assert (filme escolhido))
+	(printout t " Rei Leao (1994 ~ 2019)" crlf))
 
 
 ; Batman 
@@ -582,7 +582,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t " Batman de Christofer Nolan (2005 ~ 2012)" crlf))
 
 
@@ -599,7 +599,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Mad Max (1979 ~ 2015)" crlf))
 
 
@@ -616,7 +616,7 @@
 	(or (Oscar (oscar nao )) (Oscar (oscar sim)))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Tropa de Elite (2007)" crlf))
 
 ; Ilha das Flores
@@ -632,7 +632,7 @@
 	(Oscar (oscar nao ))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Ilha das Flores (1989)" crlf))
 
 
@@ -649,7 +649,7 @@
 	(Oscar (oscar nao ))
 	(or (Faixa (faixa adulto)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Seremos História? (2016)" crlf))
 
 
@@ -666,7 +666,7 @@
 	(Oscar (oscar nao ))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Democracia em vertigem (2019)" crlf))
 
 ; Kurt Cobain: Montage of Heck
@@ -682,7 +682,7 @@
 	(Oscar (oscar nao ))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Kurt Cobain: Montage of Heck (2015)" crlf))
 
 ; Shrek
@@ -698,7 +698,7 @@
 	(Oscar (oscar nao ))
 	(or (Faixa (faixa infantil)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Shrek (2001 ~ 2010)" crlf))
 
 ; Planeta dos Macacos
@@ -706,7 +706,7 @@
 	(Qnt (qnt triologia))
 	(or (Final (final feliz)) (Final (final triste)))
 	(Principal(principal unico)) 
-	(or (Personagem (personagem humanos)) (Personagem(personagem objetos))
+	(or (Personagem (personagem humanos)) (Personagem(personagem objetos)))
 	(or (Classe (classe realista)) (Classe (classe si-fi)))
 	(or (ParteMelhor (parteMelhor contexto )) (ParteMelhor (parteMelhor final ))) 
 	(or(Atores (atores sim )) (Atores (atores nao )))
@@ -714,12 +714,12 @@
 	(Oscar (oscar nao ))
 	(or (Faixa (faixa adulto)) (Faixa (faixa familia)))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Planeta dos Macacos (2011 ~ 2017)" crlf))
 
 ; Django Livre
 (defrule filme40
-	(Qnt (qnt unico
+	(Qnt (qnt unico))
 	(or (Final (final feliz)) (Final (final triste)))
 	(or (Principal(principal unico)) (Principal (principal grupo)))
 	(Personagem(personagem humanos))
@@ -730,13 +730,13 @@
 	(or (Oscar (oscar sim)) (Oscar (oscar nao )))
 	(Faixa (faixa adulto))
 	=>
-	(assert (grad done))
+	(assert (filme escolhido))
 	(printout t "Django Livre (2012)" crlf))
 
 
 (defrule None
    (declare (salience -100))
-   (and (not (grad done)))
+   (and (not (filme escolhido)))
    =>
    (printout t "Qualquer filme do Adam Sandler (1989 ~ 2019)" crlf))
 
